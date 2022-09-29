@@ -1,6 +1,6 @@
 const tablero = []
 const divTablero = document.getElementById('tablero')
-
+let posicionGato = [5,5]
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -50,6 +50,7 @@ function cargarTableroMatriz() {
                 e.preventDefault()
                 if (e.target.src = 'img/activo.png') {
                     e.target.src = 'img/ocupado.png'
+                    moverGatito();
                 }
             })
             // console.log(estado)
@@ -59,9 +60,116 @@ function cargarTableroMatriz() {
         }
         tablero.push(fila);
     }
-    tablero[5][5].children[0].src = 'img/gato.png';
-    tablero[5][5].disabled = true
+    tablero[posicionGato[0]][posicionGato[1]].children[0].src = 'img/gato.png';
+    tablero[posicionGato[0]][posicionGato[1]].disabled = true
 
+}
+
+
+function moverGatito(){
+    
+    let fuente= ''
+    let numero = 0
+    while (numero<4) {
+        switch (numero) {
+            //Mover Izquierda
+            case 0:
+                try {
+                    fuente =tablero[posicionGato[0]][posicionGato[1]-1].children[0].src;
+                    if (fuente.split('img/')[1] == 'activo.png') {
+                        const elementoTemp = tablero[posicionGato[0]][posicionGato[1]-1];
+    
+                        tablero[posicionGato[0]][posicionGato[1]-1] = tablero[posicionGato[0]][posicionGato[1]];
+                        tablero[posicionGato[0]][posicionGato[1]] = elementoTemp;
+                        posicionGato = [posicionGato[0],posicionGato[1]-1]
+                        ponerTablero();
+                        numero=4
+                    }else{
+                        console.log('no movio')
+                        
+                        //
+                    }
+                } catch (error) {
+                    console.log('Gano el gato')
+                    numero=4
+                }
+                
+                break;
+            //Mover Derecha
+            case 1:
+                try {
+                    fuente =tablero[posicionGato[0]][posicionGato[1]+1].children[0].src;
+                    if (fuente.split('img/')[1] == 'activo.png') {
+                        const elementoTemp = tablero[posicionGato[0]][posicionGato[1]+1];
+    
+                        tablero[posicionGato[0]][posicionGato[1]+1] = tablero[posicionGato[0]][posicionGato[1]];
+                        tablero[posicionGato[0]][posicionGato[1]] = elementoTemp;
+                        posicionGato = [posicionGato[0],posicionGato[1]+1]
+                        ponerTablero();
+                        numero=4
+                    }else{
+                        console.log('no movio')
+                        
+                        //
+                    }
+                } catch (error) {
+                    console.log('Gano el gato')
+                    numero=4
+                }
+                break;
+    
+    
+    
+            //Mover Arriba
+            case 2:
+                try {
+                    fuente =tablero[posicionGato[0]-1][posicionGato[1]].children[0].src;
+                    if (fuente.split('img/')[1] == 'activo.png') {
+                        const elementoTemp = tablero[posicionGato[0]-1][posicionGato[1]];
+    
+                        tablero[posicionGato[0]-1][posicionGato[1]] = tablero[posicionGato[0]][posicionGato[1]];
+                        tablero[posicionGato[0]][posicionGato[1]] = elementoTemp;
+                        posicionGato = [posicionGato[0]-1,posicionGato[1]]
+                        ponerTablero();
+                        numero=4;
+                    }else{
+                        console.log('no movio')
+                        
+                        //
+                    }
+                } catch (error) {
+                    console.log('Gano el gato')
+                    numero=4
+                }
+                break;
+            //Mover Abajo
+            case 3:
+                try {
+                    fuente =tablero[posicionGato[0]+1][posicionGato[1]].children[0].src;
+                    if (fuente.split('img/')[1] == 'activo.png') {
+                        const elementoTemp = tablero[posicionGato[0]+1][posicionGato[1]];
+    
+                        tablero[posicionGato[0]+1][posicionGato[1]] = tablero[posicionGato[0]][posicionGato[1]];
+                        tablero[posicionGato[0]][posicionGato[1]] = elementoTemp;
+                        posicionGato = [posicionGato[0]+1,posicionGato[1]]
+                        ponerTablero();
+                        numero=4
+                    }else{
+                        console.log('no movio')
+                        console.log('ganaste')
+                        //
+                    }
+                } catch (error) {
+                    console.log('Gano el gato')
+                    numero=4
+                }
+                break;
+        }
+        numero++;
+    }
+        
+    
+    
 }
 
 
