@@ -1,8 +1,8 @@
 const tablero = []
 const divTablero = document.getElementById('tablero')
-let posicionGato = [5,5]
-
-
+let posicionGato = []
+let anchoTablero = 11
+let altoTablero = 11
 document.addEventListener('DOMContentLoaded',()=>{
     cargarTableroMatriz();
     ponerTablero();
@@ -38,9 +38,9 @@ function ponerTablero() {
 
 function cargarTableroMatriz() {
     
-    for (let index = 0; index < 11; index++) {
+    for (let index = 0; index < altoTablero; index++) {
         const fila = []
-        for (let index = 0; index < 11; index++) {
+        for (let index = 0; index < anchoTablero; index++) {
             const estado = document.createElement('button');
             estado.classList.add('estado');
             const img = document.createElement('img');
@@ -50,7 +50,7 @@ function cargarTableroMatriz() {
                 e.preventDefault()
                 if (e.target.src = 'img/activo.png') {
                     e.target.src = 'img/ocupado.png'
-                    moverGatito();
+                    generarEstados(tablero);
                 }
             })
             // console.log(estado)
@@ -60,6 +60,7 @@ function cargarTableroMatriz() {
         }
         tablero.push(fila);
     }
+    posicionGato = [(tablero.length-1)/2,(tablero[0].length-1)/2]
     tablero[posicionGato[0]][posicionGato[1]].children[0].src = 'img/gato.png';
     tablero[posicionGato[0]][posicionGato[1]].disabled = true
 
@@ -172,4 +173,9 @@ function moverGatito(){
     
 }
 
-
+function generarEstadis(tablero) {
+    for (let index = 0; index < 4; index++) {
+        
+        
+    }
+}
