@@ -50,7 +50,7 @@ function cargarTableroMatriz() {
                 e.preventDefault()
                 if (e.target.src = 'img/activo.png') {
                     e.target.src = 'img/ocupado.png'
-                    generarEstados(tablero);
+                    generarEstados(...tablero);
                 }
             })
             // console.log(estado)
